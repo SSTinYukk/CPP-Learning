@@ -16,7 +16,7 @@ class Point
     
     int m_X;
     int m_Y;
-}
+};
 
 
 class Circle

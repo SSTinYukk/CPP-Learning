@@ -13,9 +13,6 @@
                         "-o",
                         "${fileDirname}/${fileBasenameNoExtension}.out",
                         "-lpthread",
-                        "-lmysqlclient",
-                        "-lcjson",
-                        "-luchardet",
         ​
                     ],
                     "presentation": {
