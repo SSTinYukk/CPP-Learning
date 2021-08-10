@@ -14,5 +14,6 @@
         "data.h": "c",
         "bson.h": "c",
         "ostream": "cpp"
-    }
+    },
+    "sqltools.connections": []
 }
