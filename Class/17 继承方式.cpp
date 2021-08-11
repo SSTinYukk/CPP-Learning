@@ -21,11 +21,6 @@ public:
     }
 };
 
-class Son2:protected Base1
-{
-    
-};
-
 void test01()
 {
     Son1 s1;
