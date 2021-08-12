@@ -1,7 +1,6 @@
 #include "workerManager.h"
 #include <iostream>
 using namespace std;
-
 int main() {
 
   WorkerManager wm;
