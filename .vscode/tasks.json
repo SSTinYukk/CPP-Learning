@@ -1,33 +1,21 @@
-    {
-        // 有关 tasks.json 格式的文档，请参见
-            // https://go.microsoft.com/fwlink/?LinkId=733558
-            "version": "2.0.0",
-            "tasks": [
-                {
-                    "label": "build",
-                    "type": "shell",
-                    "command": "g++",
-                    "args": [
-                        "-g",
-                        "${file}",
-                        "-o",
-                        "${fileDirname}/${fileBasenameNoExtension}.out",
-                        "-lpthread",
-        ​
-                    ],
-                    "presentation": {
-                        "reveal": "never"
-                    },
-                    "problemMatcher": [
-                        "$gcc"
-                    ]
-                    // "problemMatcher": { //自己编写的，正常运行
-                    //     "owner": "cpp",
-                    //     "fileLocation": [
-                    //         "relative",
-                    //         "\\"
-                    //     ],
-                    // }
-                }
-            ]
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with Clang",
+            "type": "shell",
+            "command": "clang++",
+            "args": [
+                "-std=c++11",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.out",
+                "-g"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
+    ]
+}
