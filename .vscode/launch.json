@@ -10,7 +10,9 @@
             "program": "${fileDirname}/${fileBasenameNoExtension}.out",
             "stopAtEntry": false,
             "launchCompleteCommand": "exec-run",
-            "MIMode": "lldb"
+
+            "MIMode": "gdb",
+
         }
     ],
     "configurations1": [
@@ -35,4 +37,5 @@
             ]
         }
     ]
-}
+  }
+  
