@@ -21,6 +21,13 @@
                     "problemMatcher": [
                         "$gcc"
                     ]
+                    // "problemMatcher": { //自己编写的，正常运行
+                    //     "owner": "cpp",
+                    //     "fileLocation": [
+                    //         "relative",
+                    //         "\\"
+                    //     ],
+                    // }
                 }
             ]
         }
