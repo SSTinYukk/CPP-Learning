@@ -1,22 +1,20 @@
+//tasks.json
 {
-    "version": "2.0.0",
     "tasks": [
-      {
-        "label": "Build with Clang",
-        "type": "shell",
-        "command": "clang++",
-        "args": [
-          "-g",
-          "-std=c++17",
-          "${file}",
-          "-o",
-          "${fileDirname}/${fileBasenameNoExtension}.out",
-
-        ],
-        "group": {
-          "kind": "build",
-          "isDefault": true
+        {
+            "type": "shell",
+            "label": "clang++ build active file",   // 任务名称，与launch.json的preLaunchTask相对应
+            "command": "/bin/clang++",  //命令，与在终端编译的参数一样
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}" //输出的可执行文件可以不要后缀名，为了方便:)
+            ],
+            "options": {
+                "cwd": "/bin"
+            }
         }
-      }
-    ]
- }
+    ],
+    "version": "2.0.0"
+}

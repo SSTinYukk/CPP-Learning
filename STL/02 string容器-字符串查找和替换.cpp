@@ -12,7 +12,7 @@ int main()
         cout<<"没找到"<<endl;
     }else
     {
-        cout<<"找到字符串 坐标:"<<pos<<endl;
+        cout<<"Local:"<<pos<<endl;
     }
     return 0;
 }
