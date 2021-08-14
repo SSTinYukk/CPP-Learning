@@ -9,7 +9,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}" //输出的可执行文件可以不要后缀名，为了方便:)
+                "${fileDirname}/${fileBasenameNoExtension}.out" //输出的可执行文件可以不要后缀名，为了方便:)
             ],
             "options": {
                 "cwd": "/bin"

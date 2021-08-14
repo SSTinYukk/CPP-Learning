@@ -1,18 +1,46 @@
 {
+
     "configurations": [
+    
         {
+    
             "name": "Linux",
+    
             "includePath": [
-                "${workspaceFolder}/**",
-                "/usr/include/mysql",
-                "/usr/local/include/libbson-1.0"
+    
+                "/usr/inlcude",
+    
+                "/usr/local/include",
+    
+                "${workspaceFolder}/**"
             ],
+    
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "linux-gcc-x64"
+    
+            "compilerPath": "/usr/bin/clang",
+    
+            "cStandard": "c11",
+    
+            "cppStandard": "c++17",
+    
+            "browse":{"path":[
+    
+                "/usr/inlcude",
+    
+                "/usr/local/include",
+    
+                "${workspaceFolder}/**"
+    
+            ]
+    
+         },
+    
+            "intelliSenseMode": "clang-x64"
+    
         }
+    
     ],
+    
     "version": 4
-}
+    }
+    
