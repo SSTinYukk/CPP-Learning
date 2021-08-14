@@ -4,6 +4,7 @@ using namespace std;
 #include<vector>
 #include<deque>
 #include<algorithm>
+#include<ctime>
 
 class Person
 {
@@ -36,6 +37,7 @@ void createPerson(vector<Person>&v)
 
 void setScore(vector<Person>&v)
 {
+
     for(vector<Person>::iterator it=v.begin();it!=v.end();it++)
     {
         deque<int>d;
@@ -63,6 +65,7 @@ void setScore(vector<Person>&v)
 
 int main()
 {
+    srand((unsigned int)time(NULL));
     //1.创建五名选手
     vector<Person>v;
     createPerson(v);
