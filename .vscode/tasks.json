@@ -6,6 +6,7 @@
             "label": "clang++ build active file",   // 任务名称，与launch.json的preLaunchTask相对应
             "command": "/bin/clang++",  //命令，与在终端编译的参数一样
             "args": [
+                "-std=c++17",
                 "-g",
                 "${file}",
                 "-o",
