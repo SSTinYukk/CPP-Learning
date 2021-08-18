@@ -1,4 +1,5 @@
-#include "workerManager.h"
+#include "workerManager.cpp"
+#include <cstdio>
 #include <iostream>
 using namespace std;
 int main() {
@@ -29,7 +30,7 @@ int main() {
     case 7: //清空文件
       break;
     default:
-      system("cls");
+      cout<<"\033c";
       break;
     }
   }

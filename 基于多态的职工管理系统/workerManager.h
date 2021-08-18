@@ -7,4 +7,5 @@ public:
     WorkerManager();
     ~WorkerManager();
     void Show_Menu();
+    void sys_exit();
 };
