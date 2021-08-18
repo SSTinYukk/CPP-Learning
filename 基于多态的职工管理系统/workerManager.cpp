@@ -25,3 +25,8 @@ void WorkerManager::Show_Menu()
   cout << "********************************************" << endl;
   cout << endl;
 }
+
+void WorkerManager::sys_exit()
+{
+  
+}
