@@ -3,15 +3,12 @@
 using namespace std;
 
 #include "workerManager.cpp"
-//#include"employee.cpp"
+#include"employee.cpp"
 #include "manager.cpp"
-//#include "boss.cpp"
+#include "boss.cpp"
 
 int main() {
 
-  Worker *worker =NULL;
-  worker = new Manager(1,"张三",1);
-  worker->showInfo();
   // WorkerManager wm;
   // int choice = 0;
   // while (true) {
