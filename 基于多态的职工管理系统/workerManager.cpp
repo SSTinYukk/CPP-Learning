@@ -1,4 +1,6 @@
 #include"workerManager.h"
+#include <cstdlib>
+#include<stdlib.h>
 
 WorkerManager::WorkerManager()
 {
@@ -28,5 +30,5 @@ void WorkerManager::Show_Menu()
 
 void WorkerManager::sys_exit()
 {
-  
+  exit(0);
 }

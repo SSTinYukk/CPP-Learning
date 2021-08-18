@@ -14,6 +14,7 @@ int main() {
 
     switch (choice) {
     case 0: //退出系统
+      wm.sys_exit();
       break;
     case 1: //添加职工
       break;
