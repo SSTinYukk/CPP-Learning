@@ -17,4 +17,5 @@ int main()
         }
     }
     cout<<num<<endl;
+    cout<<v.capacity()<<endl;
 }
