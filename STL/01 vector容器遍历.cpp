@@ -15,7 +15,7 @@ void test01()
     v.push_back(20);
     v.push_back(30);
     v.push_back(40);
-    
+
 
     vector<int>::iterator pBegin =v.begin();
     vector<int>::iterator pEnd = v.end();
@@ -25,7 +25,6 @@ void test01()
         pBegin++;
     }
 
-    pBegin = v.begin();
 
     for(vector<int>::iterator i = pBegin;i!=pEnd;i++){
         cout<<*i<<endl;
