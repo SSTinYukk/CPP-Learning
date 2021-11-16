@@ -3,22 +3,20 @@ package main
 import "fmt"
 
 func main() {
-	s := []int{2, 3, 5, 7, 11, 13}
-	printSlice(s)
+	a := make([]int, 5)
+	printSlice("a", a)
 
-	// 截取切片使其长度为 0
-	s = s[:0]
-	printSlice(s)
+	b := make([]int, 0, 5)
+	printSlice("b", b)
 
-	// 拓展其长度
-	s = s[:4]
-	printSlice(s)
+	c := b[:2]
+	printSlice("c", c)
 
-	// 舍弃前两个值
-	s = s[2:]
-	printSlice(s)
+	d := c[2:5]
+	printSlice("d", d)
 }
 
-func printSlice(s []int) {
-	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+func printSlice(s string, x []int) {
+	fmt.Printf("%s len=%d cap=%d %v\n",
+		s, len(x), cap(x), x)
 }
