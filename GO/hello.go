@@ -2,21 +2,14 @@ package main
 
 import "fmt"
 
-func main() {
-	a := make([]int, 5)
-	printSlice("a", a)
-
-	b := make([]int, 0, 5)
-	printSlice("b", b)
-
-	c := b[:2]
-	printSlice("c", c)
-
-	d := c[2:5]
-	printSlice("d", d)
+// 返回一个“返回int的函数”
+func fibonacci() func() int {
+    
 }
 
-func printSlice(s string, x []int) {
-	fmt.Printf("%s len=%d cap=%d %v\n",
-		s, len(x), cap(x), x)
+func main() {
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
 }
