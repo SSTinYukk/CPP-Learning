@@ -25,11 +25,16 @@ func (t *Dog) Sleep() {
 	fmt.Println("Dog is Sleeping...")
 }
 
+func (t *Cat)GetColor()string{
+	return t.color
+}
+
 func main() {
 	var s Cat
 	var d Dog
 	s.color = "red"
 	d.color = "blue"
+	fmt.Println(s.GetColor())
 	s.Sleep()
 	d.Sleep()
 }
