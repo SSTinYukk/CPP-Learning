@@ -21,6 +21,5 @@ func findTag(arg interface{}){
 
 func main(){
 	var re resume 
-	findTag(&re)
-	
+	findTag(&re)	
 }
