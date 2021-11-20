@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net"
 	"sync"
 )
@@ -26,7 +27,6 @@ func(t *Server)ListenMessage(){
 			cli.C<-msg  
 		}
 		t.mapLock.Unlock() 
-
 	}
 }
 
@@ -62,6 +62,25 @@ func (t *Server) Handler(conn net.Conn) {
 	//广播当前用户上线消息
 
 	t.BroadCast(user,"已上线")
+
+	go func(){
+		buf:= make([]byte,4096)
+		for{
+			n,err :=conn.Read(buf)
+			if n == 0{
+				t.BroadCast(user,"下线")
+				return
+			}
+
+			if err !=nil && err != io.EOF{
+				fmt.Println("Conn Read err:",err)
+			}
+			//提取用户的消息
+			msg:=string(buf[:n-1])
+			//将得到的信息进行广播
+			t.BroadCast(user,msg)
+		}
+	}()
 }
 
 //启动服务器的接口
