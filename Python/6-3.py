@@ -22,5 +22,5 @@ assert(type(i) == list)
 r = pack(i)
 assert type(r)==bytearray or type(r)==bytes
 
-o = unpack(r)
+o = unpack(r) 
 print(i==o)

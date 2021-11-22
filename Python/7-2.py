@@ -26,5 +26,5 @@ def find_stu(N):
 n = int(input())
 if n != -1:
     find_stu(n)
-else:
+else: 
     pass
