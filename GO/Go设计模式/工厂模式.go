@@ -1,4 +1,4 @@
-package Factory
+package main
 
 import "fmt"
 
@@ -26,4 +26,9 @@ func NewRestaurant(name string)Restaurant{
 		return &Qingfeng{}
 	}
 	return nil
+}
+
+func main(){
+	NewRestaurant("d").GetFood()
+	NewRestaurant("q").GetFood()
 }
