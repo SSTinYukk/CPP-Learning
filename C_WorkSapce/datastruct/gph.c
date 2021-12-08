@@ -26,6 +26,19 @@ typedef struct LNode{
     //数据域
 }LNode,*List;
 
+typedef struct HNode{
+    char vertex;
+    List list;
+}gNode;
+
+typedef struct ListGraph{
+    gNode glist[MAX_SIZE];
+
+    int glist_nums;
+    int arc_nums;
+}ListGraph;
+
+
 int push(List pList,int num){
     LNode* pnew=(LNode *)malloc(sizeof(LNode));
     pnew->data=num;
@@ -113,6 +126,40 @@ int init_graph(Graph *g)
     }
     return 1;
 }
+
+int FindVexIndex(ListGraph* g,char VexName){
+    for(int i=1;i<=g->glist_nums;i++){
+        if(g->glist[i].vertex==VexName){
+            return i;
+        }
+    }
+}
+
+int InitListGraph(ListGraph* g){
+    printf("请输入顶点数和边数:\n");
+    scanf("%d%d",&g->glist_nums,&g->arc_nums);
+    for(int i=1;i<=g->glist_nums;i++){
+        char c;
+        while ((c = getchar()) != EOF && c != '\n');//不停地使用getchar()获取缓冲中字符，直到获取的c是“\n”或文件结尾符EOF为止  
+        printf("请输入顶点%d\n",i);
+        scanf("%c",&g->glist[i].vertex);
+        g->glist[i].list=(LNode*)malloc(sizeof(LNode));
+    }
+    for(int i=1;i<=g->arc_nums;i++){
+        char c;
+        while ((c = getchar()) != EOF && c != '\n');//不停地使用getchar()获取缓冲中字符，直到获取的c是“\n”或文件结尾符EOF为止  
+        printf("请输入边%d\n",i);
+        char vex_name_a,vex_name_b=0;
+        int vex_index_a,vex_index_b=0;
+        scanf("%c%c",&vex_name_a,&vex_name_b);
+        vex_index_a=FindVexIndex(g,vex_index_a);
+        vex_index_b=FindVexIndex(g,vex_name_b);
+        push(g->glist[vex_index_a].list,vex_index_b);
+        push(g->glist[vex_index_b].list,vex_index_a);
+    }
+    return 0;
+}
+
 
 int locateVertex(const Graph *g,char c){
     for(int i=1;i<=g->vex_nums;i++){
@@ -214,29 +261,28 @@ int FlushVisted(const Graph *g)
     return 0;
 }
 
-// int main()
-// {
-//     Graph *g=(Graph *)malloc(sizeof(Graph));
-//     init_graph(g);
-//     //初始化图结构
-//     create_graph(g);
-//     //向图读入数据
-//     firstStart(g);
-//     //DFS遍历
-//     FlushVisted(g);
-//     //刷新访问记录数组
-//     BfsFirstStart(g);
-//     //BFS遍历
-//     return 0;
-// }
+int main()
+{
+    int choice;
+    printf("1.邻接表 or 2.邻接矩阵 Please put in.\n");
+    scanf("%d",&choice);
+    if(choice==1){
+        ListGraph *g=(ListGraph*)malloc(sizeof(ListGraph));
+        InitListGraph(g);
 
-int main(){
-    List list = (List)malloc(sizeof(LNode));
-    LNode *p;
-    push(list,1);
-     push(list,2);
-    
-    del(list,1);
-    p=find(list,1);
-    printf("%d",p->data);
+    }else{
+        Graph *g=(Graph *)malloc(sizeof(Graph));
+        init_graph(g);
+        //初始化图结构
+        create_graph(g);
+        //向图读入数据
+        firstStart(g);
+        //DFS遍历
+        FlushVisted(g);
+        //刷新访问记录数组
+        BfsFirstStart(g);
+        //BFS遍历
+        
+    }
+    return 0;
 }
