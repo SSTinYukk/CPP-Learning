@@ -53,6 +53,20 @@ int push(List pList,int num){
     return 0;
 }
 
+int insert(List pList,int num)
+{
+    LNode* pnew=(LNode *)malloc(sizeof(LNode));
+    pnew->data=num;
+    pnew->next=NULL;
+    for(LNode*p =pList->next,*q;p!=NULL;p=p->next){
+        if(p->data>pnew->data){
+            pnew->next=p;
+            q->next=pnew;
+        }
+    }
+    return 0;
+}
+
 int del(List pList,int num){
     if(pList->next==NULL){
         printf("链表为空,无法删除\n");
@@ -133,6 +147,7 @@ int FindVexIndex(ListGraph* g,char VexName){
             return i;
         }
     }
+    return 1;
 }
 
 int InitListGraph(ListGraph* g){
@@ -154,11 +169,33 @@ int InitListGraph(ListGraph* g){
         scanf("%c%c",&vex_name_a,&vex_name_b);
         vex_index_a=FindVexIndex(g,vex_index_a);
         vex_index_b=FindVexIndex(g,vex_name_b);
-        push(g->glist[vex_index_a].list,vex_index_b);
-        push(g->glist[vex_index_b].list,vex_index_a);
+        insert(g->glist[vex_index_a].list,vex_index_b);
+        insert(g->glist[vex_index_b].list,vex_index_a);
     }
     return 0;
 }
+
+int ListGraphDFS(ListGraph *g,int index){
+    printf("%c",g->glist[index].vertex);
+    visted[index]=1;
+    for(LNode*p=g->glist[index].list->next;p!=NULL;p=p->next){
+        if(visted[p->data]!=1){
+            ListGraphDFS(g,p->data);
+        }
+    }
+    return 1;
+}
+
+int ListGraphFirstAccess(ListGraph *g){
+    printf("深度优先遍历:");
+    for(int i=1;i<=g->glist_nums;i++){
+        if(visted[i]!=1){
+            ListGraphDFS(g,i);
+        }
+    }
+return 0;
+}
+
 
 
 int locateVertex(const Graph *g,char c){
@@ -269,6 +306,7 @@ int main()
     if(choice==1){
         ListGraph *g=(ListGraph*)malloc(sizeof(ListGraph));
         InitListGraph(g);
+        ListGraphFirstAccess(g);
 
     }else{
         Graph *g=(Graph *)malloc(sizeof(Graph));
