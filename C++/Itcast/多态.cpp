@@ -22,7 +22,7 @@ void doSpeak(Animal &animal){
 void test01(){
     Cat cat;
     doSpeak(cat);
-   cout<<decltype()<<endl;
+   cout<<sizeof(Animal)<<endl;
 }
 
 int main(){
