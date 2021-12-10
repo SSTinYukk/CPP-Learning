@@ -7,5 +7,4 @@ public:
     virtual int GetResult(){
         return 0;
     }
-    int 
 };
