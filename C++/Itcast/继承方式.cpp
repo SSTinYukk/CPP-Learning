@@ -41,9 +41,6 @@ class Son3:private Son2{
     }   
 };
 
-
-
-
 void test01(){
     Son2 a;
     a.func();

@@ -14,8 +14,7 @@ public:
 class Son:public Base
 {
 public:
-    virtual void func()
-    {
+    virtual void func(){
         cout<<"func 函数调用"<<endl;
     }
 };
