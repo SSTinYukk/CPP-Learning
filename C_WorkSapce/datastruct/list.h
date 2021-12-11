@@ -1,6 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 #include <stdlib.h>
+#include<memory.h>
 typedef struct listNode{
     //保存前驱结点
     struct listNode *prev;
@@ -33,7 +34,8 @@ int listPushBack(list* plist,void* data){
     listNode* ptr_new =(listNode*)malloc(sizeof(listNode));
     ptr_new->next=NULL;
     ptr_new->prev=NULL;
-    ptr_new->value=data;
+    ptr_new->value=(void *)malloc(sizeof(data));
+    memcpy(ptr_new->value,data,sizeof(data));
     //插入结点
     if(plist->head==NULL&&plist->tail==NULL){
         plist->head=ptr_new;
@@ -54,7 +56,8 @@ int listPushFront(list* plist,void* data){
     listNode* ptr_new =(listNode*)malloc(sizeof(listNode));
     ptr_new->next=NULL;
     ptr_new->prev=NULL;
-    ptr_new->value=data;
+    ptr_new->value=(void *)malloc(sizeof(data));
+    memcpy(ptr_new->value,data,sizeof(data));
     //插入结点
     if(plist->head==NULL&&plist->tail==NULL){
         plist->head=ptr_new;
@@ -70,35 +73,106 @@ int listPushFront(list* plist,void* data){
 }
 
 int listPopFront(list* plist){
+    
     if(plist->len>0){
-        listNode* ptr_rem=plist->head;
-        plist->head=plist->head->next;
-        plist->head->prev=NULL;
-        ptr_rem->prev=NULL;
-        //链表长度减一
-        plist->len--;
-
-        free(ptr_rem);  
-        return 0;
+        if(plist->head==plist->tail){
+            listNode* ptr_rem=plist->head;
+            int ret=*(int*)plist->tail->value;
+            
+            plist->head=NULL;
+            plist->tail=NULL;
+            plist->len--;
+            free(ptr_rem->value);
+            free(ptr_rem);
+            return ret;
+        }else{
+            int ret=*(int*)plist->head->value;
+            listNode* ptr_rem=plist->head;
+            plist->head=plist->head->next;
+            plist->head->prev=NULL;
+            ptr_rem->prev=NULL;
+            //链表长度减一
+            plist->len--;
+            free(ptr_rem->value);
+            free(ptr_rem);  
+            return ret;
+        }
+    }else{
+        return -1;          //链表为空无法删除
     }
 }
 
 int listPopBack(list* plist){
     if(plist->len>0){
-        listNode* ptr_rem=plist->tail;
-        plist->tail=plist->tail->prev;
-        plist->tail->next=NULL;
-        ptr_rem->prev=NULL;
-        //链表长度减一
-        plist->len--;
+        if(plist->head==plist->tail){
+            listNode* ptr_rem=plist->head;
+            int ret=*(int*)plist->tail->value;
+            
+            plist->head=NULL;
+            plist->tail=NULL;
+            plist->len--;
+            free(ptr_rem->value);
+            free(ptr_rem);
+            return ret;
+        }else{
+            int ret=*(int*)plist->tail->value;
+            listNode* ptr_rem=plist->tail;
+            plist->tail=plist->tail->prev;
+            plist->tail->next=NULL;
+            ptr_rem->prev=NULL;
+            //链表长度减一
+            plist->len--;
 
-        free(ptr_rem);
-        return 0;
+            free(ptr_rem);
+            return ret;
+
+        }
+        
+    }else{
+        return -1;
     }
 }
 
 int listIsEmpty(list* plist){
     return !(plist->len);
+}
+
+int listInsertIntSorted(list* plist,int* data){
+     //创建新结点并初始化
+    listNode* ptr_new =(listNode*)malloc(sizeof(listNode));
+    ptr_new->next=NULL;
+    ptr_new->prev=NULL;
+    ptr_new->value=(void *)malloc(sizeof(data));
+    memcpy(ptr_new->value,data,sizeof(data));
+
+    listNode *iterator=plist->head,*last;
+    for(;iterator!=NULL;last=iterator,iterator=iterator->next){
+        if(*(int*)iterator->value<=*data){
+            continue;
+        }else{
+            if(iterator==plist->head){
+                listPushFront(plist,ptr_new->value);
+            }else{
+                ptr_new->prev=last;
+                ptr_new->next=iterator;
+                last->next=ptr_new;
+                iterator->prev=ptr_new;
+            }           
+        }
+    }
+    if(iterator==plist->tail->next){
+        listPushBack(plist,ptr_new->value);
+        return 0;
+    }
+    return -1;
+}
+
+int listClear(list *plist){
+    int ret=0;
+    do{
+        ret=listPopFront(plist);
+    }while(ret!=1);
+    return 0;
 }
 
 #endif
