@@ -1,71 +1,60 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#define MAXVEX 100
-#define INFINITY 65535
-int visited[MAXVEX]={0};
-typedef struct
-{
-	char vexs[MAXVEX];
-	int arc[MAXVEX][MAXVEX];
-	int numNodes,numEdges;
-}MGraph;
-void CreateMGraph(MGraph *g);
-void DFS(MGraph *g,int i);
-int main()
-{
-	MGraph g;
-	int i;
-	CreateMGraph(&g);
-	printf("\n"); 
-	printf("输入i\n");
-	scanf("%d",&i);
-	printf("深度优先遍历\n");
-	DFS(&g,i);
+#include<stdio.h>
+#include "list.h"
+
+int max(int *arr,int n){
+    int max=0;
+    for(int i=0;i<n;i++){
+        if(arr[i]>max){
+            max=arr[i];
+        }
+    }
+    return max;
 }
-void CreateMGraph(MGraph *g)
-{
-	int i,j,k,w;
-	printf("请输入顶点数和边数:\n");
-	scanf("%d%d",&g->numNodes,&g->numEdges);
-	for(i=1;i<=g->numNodes;i++)
-	{
-        char c;
-        while ((c = getchar()) != EOF && c != '\n');//不停地使用getchar()获取缓冲中字符，直到获取的c是“\n”或文件结尾符EOF为止  
-	    printf("输入第%d个顶点信息",i);
-		scanf("%c",&g->vexs[i]);
-	}
-	for(i=1;i<=g->numNodes;i++)
-	   for(j=1;j<=g->numNodes;j++)
-	      g->arc[i][j]=INFINITY;
-	for(k=1;k<=g->numEdges;k++)
-	{
-		printf("请输入边(vi,vj)上的下标i,下标j和权w:\n");
-		scanf("%d %d %d",&i,&j,&w);
-		g->arc[i][j]=w;
-		g->arc[j][i]=g->arc[i][j];
-	}
-	printf("输出邻接矩阵为：\n");
-	for(i=1;i<=g->numNodes;i++)
-	{
-		for(j=1;j<=g->numNodes;j++)
-		{
-			printf("%8d",g->arc[i][j]);
-		}
-		printf("\n");
-	} 
+
+int place(int num){
+    int num_place=0;
+    while(num){
+        num/=10;
+        num_place++;
+    }
+    return num_place;
 }
-void DFS(MGraph *g,int i)
-{
-	int j;
-	visited[i]=1;
-	printf("%d",i);
-    fflush(stdout);
-	for(j=1;j<=g->numNodes;j++)
-	{
-		if((g->arc[i][j]>=1)&& (!visited[j]))
-		{
-			DFS(g,j);
-		}
-	}
+
+int main(){
+    list row;
+    listInit(&row);
+
+    int n=10;
+    int arr[10]={23,62,40,679,345,26,34,132,231,728};
+    for(int i=0;i<n;i++){
+        listPushBack(&row,(void*)&arr[i]);
+    }
+
+    list base[10];
+    for(int i=0;i<10;i++){
+        listInit(&base[i]);
+    }
+    
+    int divisor=1;
+    int max_num=max(arr,10);
+    int place_num=place(max_num);    
+    for(int i=0;i<place_num;i++){
+        for(int j=0;j<n;j++){
+            int temp_num=listPopFront(&row);
+            int index_num=(temp_num/divisor)%10;
+            printf("pop:%d index:%d\n",temp_num,index_num);
+            listPushBack(&base[index_num],(void*)&temp_num);
+        }
+        for(int j=0;j<10;j++){
+            for(int k=0;k<base[j].len;k++){
+                int temp_num=listPopFront(&base[j]);
+                printf("pop:%d\n",temp_num);
+                listPushBack(&row,(void*)&temp_num);
+            }
+        }
+        divisor*=10;
+    }
+    for(int i=0;i<n;i++){
+        printf("%d\n",listPopFront(&row));
+    }
 }
