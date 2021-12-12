@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include "list.h"
+//#define NDEBUG
 
 int max(int *arr,int n){
     int max=0;
@@ -25,7 +26,7 @@ int main(){
     listInit(&row);
 
     int n=10;
-    int arr[10]={23,62,40,679,345,26,34,132,231,728};
+    int arr[10]={23,62,40,679,3455,26,34,132,231,728};
     for(int i=0;i<n;i++){
         listPushBack(&row,(void*)&arr[i]);
     }
@@ -40,21 +41,26 @@ int main(){
     int place_num=place(max_num);    
     for(int i=0;i<place_num;i++){
         for(int j=0;j<n;j++){
-            int temp_num=listPopFront(&row);
+            int temp_num=listPopFront(&row,0);
             int index_num=(temp_num/divisor)%10;
+            #ifdef NDEBUG
             printf("pop:%d index:%d\n",temp_num,index_num);
+            #endif
             listPushBack(&base[index_num],(void*)&temp_num);
         }
         for(int j=0;j<10;j++){
-            for(int k=0;k<base[j].len;k++){
-                int temp_num=listPopFront(&base[j]);
+            while(!listIsEmpty(&base[j])){
+                int temp_num=listPopFront(&base[j],0);
+                #ifdef NDEBUG
                 printf("pop:%d\n",temp_num);
+                #endif
                 listPushBack(&row,(void*)&temp_num);
             }
         }
         divisor*=10;
     }
     for(int i=0;i<n;i++){
-        printf("%d\n",listPopFront(&row));
+        printf("%d\t",listPopFront(&row,0));
     }
+    printf("\n");
 }
