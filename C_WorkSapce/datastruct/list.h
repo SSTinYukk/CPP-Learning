@@ -72,7 +72,7 @@ int listPushFront(list* plist,void* data){
     return 0;
 }
 
-int listPopFront(list* plist){
+int listPopFront(list* plist,void** ptr_data){
     
     if(plist->len>0){
         if(plist->head==plist->tail){
@@ -82,7 +82,11 @@ int listPopFront(list* plist){
             plist->head=NULL;
             plist->tail=NULL;
             plist->len--;
-            free(ptr_rem->value);
+            if(ptr_data){
+                *ptr_data=ptr_rem->value;
+            }else{
+                free(ptr_rem->value); 
+            }
             free(ptr_rem);
             return ret;
         }else{
@@ -93,7 +97,11 @@ int listPopFront(list* plist){
             ptr_rem->prev=NULL;
             //链表长度减一
             plist->len--;
-            free(ptr_rem->value);
+            if(ptr_data){
+                *ptr_data=ptr_rem->value;
+            }else{
+                free(ptr_rem->value); 
+            }
             free(ptr_rem);  
             return ret;
         }
@@ -102,7 +110,7 @@ int listPopFront(list* plist){
     }
 }
 
-int listPopBack(list* plist){
+int listPopBack(list* plist,void** ptr_data){
     if(plist->len>0){
         if(plist->head==plist->tail){
             listNode* ptr_rem=plist->head;
@@ -111,7 +119,11 @@ int listPopBack(list* plist){
             plist->head=NULL;
             plist->tail=NULL;
             plist->len--;
-            free(ptr_rem->value);
+            if(ptr_data){
+                *ptr_data=ptr_rem->value;
+            }else{
+                free(ptr_rem->value); 
+            }
             free(ptr_rem);
             return ret;
         }else{
@@ -122,7 +134,11 @@ int listPopBack(list* plist){
             ptr_rem->prev=NULL;
             //链表长度减一
             plist->len--;
-
+            if(ptr_data){
+                *ptr_data=ptr_rem->value;
+            }else{
+                free(ptr_rem->value); 
+            }
             free(ptr_rem);
             return ret;
 
@@ -170,7 +186,7 @@ int listInsertIntSorted(list* plist,int* data){
 int listClear(list *plist){
     int ret=0;
     do{
-        ret=listPopFront(plist);
+        ret=listPopFront(plist,0);
     }while(ret!=1);
     return 0;
 }
