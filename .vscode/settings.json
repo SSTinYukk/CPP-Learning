@@ -3,6 +3,7 @@
         "random": "cpp",
         "*.tcc": "cpp",
         "istream": "c",
-        "streambuf": "c"
+        "streambuf": "c",
+        "haffmantree_array.h": "c"
     }
 }
