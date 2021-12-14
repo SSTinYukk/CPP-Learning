@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include"haffmantree_array.h"
-#define DEBUG
+#define DEBUG   //NODEBUG 为非调试模式  DEBUG为调试模式 打印一系列帮助信息
 
 int main(){
     int num;char c;
