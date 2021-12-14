@@ -21,6 +21,7 @@ int main(){
         while ((c = getchar()) != EOF && c != '\n');
         scanf("%d",&code_tree[i].weight);
     }
+
     createHaffmanTree(code_tree,num);
     createHaffmanCodeTable(code_tree,code_table,num);
     #ifndef NODEBUG
@@ -31,6 +32,11 @@ int main(){
         printf("[%d]weight:%d\tparent:%d\tleft:%d\tright:%d\n",i,code_tree[i].weight,code_tree[i].parent,code_tree[i].left_child,code_tree[i].right_child);
     }
     #endif
-    
+    char str[MAX_SIZE]={0};
+    scanf("%s",str);
+    Encode(code_tree,code_table,str,num);
+    printf("%s\n",str);
+    Decode(code_tree,code_table,str,num);
+    printf("%s\n",str);
     
 }

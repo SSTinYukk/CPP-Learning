@@ -113,8 +113,26 @@ int Encode(HFMTNode code_tree[] ,HFMCoding code_table[] ,char* str ,int n){
    strcpy(str,dest);
 }
 
-int Decode(){
+int Decode(HFMTNode code_tree[],HFMCoding code_table[],char *src,int n){
+   char dest[MAX_SIZE]={0};
+   int p_idx=2*n-1;
+   int itor=0;
    
+   for(itor=0;itor<strlen(src);itor++){
+      if(code_tree[p_idx].left_child==0&&code_tree[p_idx].right_child==0){
+         sprintf(dest,"%s%c",dest,code_table[p_idx].uncoding);
+         p_idx=2*n-1;
+         continue;
+      }
+      
+      if(src[itor+1]=='0'){
+         p_idx=code_tree[p_idx].left_child;
+      }else if(src[itor+1]=='1'){
+         p_idx=code_tree[p_idx].right_child;
+      }
+   }
+   strcpy(src,dest);
+
 }
 
 #endif
