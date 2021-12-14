@@ -1,3 +1,4 @@
+
 // class Counter :boost::nocopyable
 // {
 //    public:
