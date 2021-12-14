@@ -59,8 +59,6 @@ int createHaffmanCodeTable(HFMTNode code_tree[],HFMCoding code_table[],int n){
    int str_idx=0;
    int i=0;
    int flag=0;
-   str[str_idx]='0';
-   str_idx++;
    while(i<n){
       while(code_tree[p].left_child!=0&&code_tree[p].right_child!=0){
          flag=0;
@@ -121,11 +119,23 @@ int Decode(HFMTNode code_tree[],HFMCoding code_table[],char *src,int n){
    char dest[MAX_SIZE]={0};
    int p_idx=2*n-1;
    int itor=0;
+   int cnt=0;
+    
+   if(src[itor+1]=='0'){
+      p_idx=code_tree[p_idx].left_child;
+   }else if(src[itor+1]=='1'){
+      p_idx=code_tree[p_idx].right_child;
+   }
    
    for(itor=0;itor<strlen(src);itor++){
       if(code_tree[p_idx].left_child==0&&code_tree[p_idx].right_child==0){
-         sprintf(dest,"%s%c",dest,code_table[p_idx].uncoding);
+         dest[cnt++]=code_table[p_idx].uncoding;
          p_idx=2*n-1;
+         if(src[itor+1]=='0'){
+            p_idx=code_tree[p_idx].left_child;
+         }else if(src[itor+1]=='1'){
+            p_idx=code_tree[p_idx].right_child;
+         }
          continue;
       }
       
