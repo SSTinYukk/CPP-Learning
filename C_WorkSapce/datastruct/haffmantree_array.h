@@ -31,6 +31,7 @@ int findTwoMin(HFMTNode code_tree[],int* first_min_idx,int* second_min_idx,int n
          min=code_tree[i].weight;
       }
    }
+   return 0;
 }
 
 int createHaffmanTree(HFMTNode code_tree[],int n){
@@ -44,6 +45,7 @@ int createHaffmanTree(HFMTNode code_tree[],int n){
       code_tree[first_idx].parent=i;
       code_tree[second_idx].parent=i;
    }
+   return 0;
 }
 
 int createHaffmanCodeTable(HFMTNode code_tree[],HFMCoding code_table[],int n){
@@ -97,6 +99,7 @@ int createHaffmanCodeTable(HFMTNode code_tree[],HFMCoding code_table[],int n){
          
       }
    }
+   return 0;
 }
 
 int Encode(HFMTNode code_tree[] ,HFMCoding code_table[] ,char* str ,int n){
@@ -111,6 +114,7 @@ int Encode(HFMTNode code_tree[] ,HFMCoding code_table[] ,char* str ,int n){
       }
    }
    strcpy(str,dest);
+   return 0;
 }
 
 int Decode(HFMTNode code_tree[],HFMCoding code_table[],char *src,int n){
@@ -132,7 +136,7 @@ int Decode(HFMTNode code_tree[],HFMCoding code_table[],char *src,int n){
       }
    }
    strcpy(src,dest);
-
+   return 0;
 }
 
 #endif
