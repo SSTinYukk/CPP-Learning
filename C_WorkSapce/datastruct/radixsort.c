@@ -43,18 +43,22 @@ int main(){
         listInit(&base[i]);
     }
     
-    int divisor=1;
-    int max_num=max(arr,10);
-    int place_num=place(max_num);    
+    int divisor=1;//除数
+    int max_num=max(arr,10);//获取最大值
+    int place_num=place(max_num); //获取最大值位数   
+
+    //开始排序
     for(int i=0;i<place_num;i++){
+        //将链表中的数据放入链式桶中
         for(int j=0;j<n;j++){
             int temp_num=listPopFront(&row,0);
-            int index_num=(temp_num/divisor)%10;
+            int index_num=(temp_num/divisor)%10; 
             #ifdef NDEBUG
             printf("pop:%d index:%d\n",temp_num,index_num);
             #endif
             listPushBack(&base[index_num],(void*)&temp_num);
         }
+        //从桶中取出放入链表中
         for(int j=0;j<10;j++){
             while(!listIsEmpty(&base[j])){
                 int temp_num=listPopFront(&base[j],0);
@@ -66,6 +70,8 @@ int main(){
         }
         divisor*=10;
     }
+
+    //打印排序好的链表
     for(int i=0;i<n;i++){
         printf("%d\t",listPopFront(&row,0));
     }
