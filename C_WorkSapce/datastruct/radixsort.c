@@ -2,6 +2,7 @@
 #include "list.h"
 //#define NDEBUG
 
+//寻找最大值
 int max(int *arr,int n){
     int max=0;
     for(int i=0;i<n;i++){
@@ -12,6 +13,7 @@ int max(int *arr,int n){
     return max;
 }
 
+//返回最大值位数 例:1435  返回值为4
 int place(int num){
     int num_place=0;
     while(num){
@@ -22,15 +24,20 @@ int place(int num){
 }
 
 int main(){
+    //初始化链表
     list row;
     listInit(&row);
 
+    //给定待排元素↓
     int n=10;
     int arr[10]={23,62,40,679,3455,26,34,132,231,728};
+
+    //将待排元素录入链表
     for(int i=0;i<n;i++){
         listPushBack(&row,(void*)&arr[i]);
     }
 
+    //创建并初始化链式桶
     list base[10];
     for(int i=0;i<10;i++){
         listInit(&base[i]);
