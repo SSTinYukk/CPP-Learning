@@ -1,111 +1,62 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#define MAXVEX 100
-#define INFINITY 65535
-int visited[MAXVEX]={0};
-typedef struct node
+void DFS_All(AdjMatrix *G,int start,int end)//所有路径 
 {
-	int data;
-	struct node * next;
-}Qnode;
-typedef struct
-{
-	Qnode * front;
-	Qnode * rear;
-}Queue;
-typedef struct
-{
-	char vexs[MAXVEX];
-	int arc[MAXVEX][MAXVEX];
-	int numNodes,numEdges;
-}MGraph;
-void CreateMGraph(MGraph *g);
-void DFS(MGraph g,int i);
-void BFS(MGraph g,int i);
-int main()
-{
-	MGraph g;
-	int i;
-	CreateMGraph(&g);
-	printf("\n"); 
-	printf("输入i\n");
-	scanf("%d",&i);
-	printf("深度\n");
-	DFS(g,i);
-	printf("\n");
-	printf("广度Ϊ\n");
-	BFS(g,i);
+ int i,j; 
+ G->vex[start].visited =1;
+ way[count]=start;
+ for(i=1;i<=G->vexnum;i++)
+ {  
+  if(G->arcs[start][i]!=INFINITY&&G->vex[i].visited==0&&i!=end)
+  {
+   count++;
+   way[count]=i;
+   DFS_All(G,i,end);
+   G->vex[i].visited=0;
+   count--;
+   flag=0;
+   continue;
+  }
+  if(G->arcs[start][i]!=INFINITY&&G->vex[i].visited==0&&i==end&&flag==0)
+  {
+   count++;
+   way[count]=end;
+   flag=1;
+   printf("\n\n");
+   printf("\t\t%d ",way[0]);
+   printf("%s ",G->vex[way[0]].name);
+   for(j=1;j<=count;j++)
+   {
+    printf("----->");
+    printf("\t%d ",way[j]);
+    printf("%s ",G->vex[way[j]].name);  
+   }
+   count--;
+   return;
+  } 
+ }  
 }
-void CreateMGraph(MGraph *g)
+void AllPath(AdjMatrix G,int dist[],int path[][MAXVEX]) //所有路径输出 
 {
-	int i,j,k,w;
-	printf("请输入顶点数和边数:\n");
-	scanf("%d %d",&g->numNodes,&g->numEdges);
-	for(i=1;i<=g->numNodes;i++)
-	{
-		char c;
-		while((c=getchar())!=EOF&&c!='\n');
-	    printf("输入第%d个顶点信息",i);
-		scanf("%c",&(g->vexs[i]));
-	}
-	for(i=1;i<=g->numNodes;i++)
-	   for(j=1;j<=g->numNodes;j++)
-	      g->arc[i][j]=INFINITY;
-	for(k=1;k<=g->numEdges;k++)
-	{
-		printf("请输入边(vi,vj)上的下标i,下标j和权w:\n");
-		scanf("%d %d %d",&i,&j,&w);
-		g->arc[i][j]=w;
-		g->arc[j][i]=g->arc[i][j];
-	}
-	printf("输出邻接矩阵为：\n");
-	for(i=1;i<=g->numNodes;i++)
-	{
-		for(j=1;j<=g->numNodes;j++)
-		{
-			printf("%8d",g->arc[i][j]);
-		}
-		printf("\n");
-	} 
-}
-void DFS(MGraph g,int i)
-{
-	int j;
-	visited[i]=1;
-	printf("%d ",i);
-	fflush(stdout);
-	for(j=1;j<=g.numNodes;j++)
-	{
-		if((g.arc[i][j]>=1)&& (!visited[j]))
-		{
-			DFS(g,j);
-		}
-	}
-}
-
-void BFS (MGraph g,int i)
-{
-	int visited[MAXVEX]={0};
-	int que[MAXVEX]={0};
-	int front=0,rear=0,j;
-	printf("%d ",i);
-	visited[i]=1;
-	rear++;
-	que[rear]=i;
-	while(front<rear)
-		{
-			front++;
-		    i=que[front];
-		    for(j=1;j<=g.numNodes;j++)
-		    {
-		    	if((g.arc[i][j]>=1)&&(!visited[j]))
-		    	{
-		    		printf("%d ",j);
-		    		visited[j]=1;
-		    		rear++;
-		    		que[rear]=j;
-				}
-			}
-		}
+ int i,j,start,end,c=1;
+ while ( c==1 )
+ {
+  system( "cls" );
+  printf( "\t\t\t\t\t\t——————所有简单路径查询——————\n" );
+  PriV(&G);
+  printf( "\n\t\t\t\t\t输入起点编号:" );
+  scanf( "%d", &start );
+  printf( "\t\t\t\t\t输入终点编号:" );
+  scanf( "%d", &end );
+  if ( start > G.vexnum || start <= 0 || end > G.vexnum || end < 0 || start == end )
+   printf( "\t\t\t\t\t\t输入错误!\n\n" );
+  else{
+   printf( "\n\t\t\t从%s到%s的所有简单路径有:\n", G.vex[start].name, G.vex[end].name );
+   DFS_All(&G,start,end); 
+  }
+  printf("\n"); 
+  printf( "\n\t\t\t\t\t\t是否继续查询所有路径?\n" );
+  printf( "\t\t\t\t\t\t1:是\n" );
+  printf( "\t\t\t\t\t\t0:返回上级菜单\n" );
+  scanf( "%d", &c );
+ }
+ system( "cls" );
 }
