@@ -4,6 +4,8 @@
         "*.tcc": "cpp",
         "istream": "c",
         "streambuf": "c",
-        "haffmantree_array.h": "c"
+        "haffmantree_array.h": "c",
+        "chrono": "c",
+        "algorithm": "c"
     }
 }
