@@ -49,10 +49,10 @@ int createHaffmanTree(HFMTNode code_tree[],int n){
 }
 
 int createHaffmanCodeTable(HFMTNode code_tree[],HFMCoding code_table[],int n){
-
+   //利用链式栈存储 存储结点下标 访问建立哈夫曼table
    list stack;
-   listInit(&stack);
-   int visited[MAX_SIZE]={0};
+   listInit(&stack);          //初始化链表
+   int visited[MAX_SIZE]={0};    
    int root=2*n-1;
    int p=root;
    char str[MAX_SIZE]={0};
@@ -60,7 +60,7 @@ int createHaffmanCodeTable(HFMTNode code_tree[],HFMCoding code_table[],int n){
    int i=0;
    int flag=0;
    while(i<n){
-      while(code_tree[p].left_child!=0&&code_tree[p].right_child!=0){
+      while(code_tree[p].left_child!=0&&code_tree[p].right_child!=0){//进入左子树 编码字符串+0
          flag=0;
          str[str_idx]='0';
          str_idx++;
@@ -70,7 +70,7 @@ int createHaffmanCodeTable(HFMTNode code_tree[],HFMCoding code_table[],int n){
       
       if (flag==0){
         
-      }else{
+      }else{//进入右子树 编码字符串+1
          str[str_idx]='1';
          str_idx++;
          i++;

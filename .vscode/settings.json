@@ -6,6 +6,9 @@
         "streambuf": "c",
         "haffmantree_array.h": "c",
         "chrono": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "atomic": "c",
+        "fstream": "c",
+        "sstream": "c"
     }
 }
