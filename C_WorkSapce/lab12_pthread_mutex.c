@@ -12,7 +12,7 @@ unsigned long sum =0;
 
 void *thread(void *arg){
     for(int i=0;i<10000;i++){
-        pthread_mutex_lock(&mutex);     //加锁
+        pthread_mutex_lock(&mutex);
         sum += 1;
         pthread_mutex_unlock(&mutex);   //解锁
     }
