@@ -9,4 +9,6 @@ func main(){
 	fmt.Println(a)
 	*p=250
 	fmt.Println(*p)
+	p=new(int)
+	*p =250
 }
