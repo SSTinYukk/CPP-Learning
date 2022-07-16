@@ -35,7 +35,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Launch file",
+            "name": "Go Run",
             "type": "go",
             "request": "launch",
             "mode": "debug",
