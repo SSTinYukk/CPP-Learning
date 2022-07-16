@@ -15,9 +15,17 @@ func main() {
 
 	defer f.Close()
 	reader := bufio.NewReader(f)
-	buf, err := reader.ReadBytes('\n')
-	if err != nil {
-		fmt.Println(err)
+	for {
+		r, _, err := reader.ReadRune()
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
+		fmt.Print(string(r))
 	}
-	fmt.Println(string(buf))
+	write := bufio.NewWriter(os.Stdout)
+	
+	write.WriteString("6666\n")
+	write.Flush()
+	fmt.Println("Wich")
 }

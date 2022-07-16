@@ -32,6 +32,7 @@ func Test4Split(t *testing.T) {
 	testGroup := map[string]testCase{
 		"case1": {"abaccba", "b", []string{"a", "acc", "a"}},
 		"case2": {"a::b::c", "::", []string{"a", "b", "c"}},
+		"case3": {"a::b::c", "=", []string{"a::b::c"}},
 	}
 	for name, tc := range testGroup {
 		t.Run(name, func(t *testing.T) {
