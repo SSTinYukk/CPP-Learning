@@ -45,11 +45,11 @@ func Test4Split(t *testing.T) {
 }
 func BenchmarkSplit(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		Split("a:b:a", ":")
+		Split("a:b:c:ccccccccccccccccccccc:a:ca:asdasdasdasdasd", ":")
 	}
 }
 func BenchmarkSplit2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		strings.Split("a:b:c", ":")
+		strings.Split("a:b:c:ccccccccccccccccccccc:a:ca:asdasdasdasdasd", ":")
 	}
 }

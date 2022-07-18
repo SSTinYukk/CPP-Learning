@@ -5,7 +5,7 @@ import (
 )
 
 func Split(str string, seq string) []string {
-	res_str := make([]string,0)
+	res_str := make([]string,0,len(str))
 	index := strings.Index(str, seq)
 	for index >= 0 {
 		res_str = append(res_str, str[:index])
