@@ -35,13 +35,18 @@ func (t *Arith) Div(args *Args, quo *Quotient) error {
 func main() {
 	wg := new(sync.WaitGroup)
 	arith := new(Arith)
+	//注册rpc
 	rpc.Register(arith)
+
 	rpc.HandleHTTP()
 	listener, err := net.Listen("tcp", ":1234")
 	if err != nil {
 		log.Fatal("listen error:", err)
 	}
-	go http.Serve(listener, nil)
-	wg.Add(1)
-	wg.Wait()
+	for {
+		go http.Serve(listener, nil)
+		wg.Add(1)
+		wg.Wait()
+	}
+
 }
