@@ -33,12 +33,13 @@ func (t *Arith) Div(args *Args, quo *Quotient) error {
 }
 
 func main() {
+	//初始化
 	wg := new(sync.WaitGroup)
 	arith := new(Arith)
 	//注册rpc
 	rpc.Register(arith)
-
 	rpc.HandleHTTP()
+	//listen
 	listener, err := net.Listen("tcp", ":1234")
 	if err != nil {
 		log.Fatal("listen error:", err)
