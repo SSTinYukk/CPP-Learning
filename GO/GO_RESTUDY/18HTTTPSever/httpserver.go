@@ -12,7 +12,7 @@ func HelloServer(w http.ResponseWriter, req *http.Request) {
 }
 func main() {
 	http.HandleFunc("/hello", HelloServer)
-	err := http.ListenAndServe("127.0.0.1:8080", nil)
+	err := http.ListenAndServe("192.168.81.131:8080", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}

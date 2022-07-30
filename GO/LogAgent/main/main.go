@@ -2,13 +2,23 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"example.com/m/v2/GO/LogAgent/kafka"
-	taillog "example.com/m/v2/GO/LogAgent/tailog"
+	"example.com/m/v2/GO/LogAgent/taillog"
 )
 
 func run() {
 	//1.读取日志
+	for {
+		select {
+		case line := <-taillog.ReadChan():
+			kafka.SendToKafka("web_log", line.Text)
+		default:
+			time.Sleep(time.Second)
+		}
+	}
+
 	//2.发送到kafka
 }
 
@@ -23,5 +33,6 @@ func main() {
 		log.Fatal(err)
 		return
 	}
+	run()
 
 }
