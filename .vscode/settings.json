@@ -10,5 +10,6 @@
         "atomic": "c",
         "fstream": "c",
         "sstream": "c"
-    }
+    },
+    "go.testFlags":["-v"]
 }
