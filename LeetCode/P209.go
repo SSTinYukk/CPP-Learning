@@ -1,29 +1,23 @@
 package leetcode
 
-import "math"
-
 func minSubArrayLen(target int, nums []int) int {
-	nums = append(nums, 0)
 	left := 0
 	right := 0
 
 	result := 0
-	bestReslt := math.MaxInt32
-	for right < len(nums)-1 {
+	bestReslt := 0
+	for right < len(nums) {
 		result = result + nums[right]
 		for result >= target {
-			if right-left < bestReslt {
-				bestReslt = right - left
+			if right-left < bestReslt || bestReslt == 0 {
+				bestReslt = right - left + 1
 			}
-
-			left++
 			result = result - nums[left]
+			left++
 
 		}
 		right++
 	}
-	if bestReslt == math.MaxInt32 {
-		bestReslt = 0
-	}
+
 	return bestReslt
 }
